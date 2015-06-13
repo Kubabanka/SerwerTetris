@@ -5,7 +5,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * Created by Bañka on 2015-06-13.
+ * Created by Bañka and dudatomasz on 2015-06-13.
  */
 
 public class Server {
