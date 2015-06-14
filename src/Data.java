@@ -1,51 +1,50 @@
 import java.io.*;
-import java.util.Arrays;
 
 
 /**
- * Created by Bañka on 2015-06-14.
+ * Created by Ba?ka on 2015-06-14.
  */
 public class Data {
 
     /**
-     * Sta³a mówi¹ca ile bloków szerokoœci ma plansza.
+     * Sta?a m?wi?ca ile blok?w szeroko?ci ma plansza.
      */
     int BoardWidth;
 
     /**
-     * Sta³a mówi¹ca ile bloków wysokoœci ma plansza.
+     * Sta?a m?wi?ca ile blok?w wysoko?ci ma plansza.
      */
     int BoardHeight;
 
     int scale;
 
     /**
-     * Iloœæ punktów za skasowanie jednej linii.
+     * Ilo?? punkt?w za skasowanie jednej linii.
      */
     int lineScore;
 
     /**
-     * Liczba punktów za zniszczenie jednego bloku przy wybuchu.
+     * Liczba punkt?w za zniszczenie jednego bloku przy wybuchu.
      */
     int blockScore;
 
     /**
-     * Kara za u¿ycie power-upu.
+     * Kara za u?ycie power-upu.
      */
     int penalty;
 
     /**
-     * Liczba punktów za przejœcie na kolejny poziom.
+     * Liczba punkt?w za przej?cie na kolejny poziom.
      */
     int levelScore;
 
     /**
-     * Prêdkoœæ opadania klocka.
+     * Pr?dko?? opadania klocka.
      */
     int speed;
 
     /**
-     * Maksymalna iloœæ power-upów.
+     * Maksymalna ilo?? power-up?w.
      */
     int maxPowerUp;
 
@@ -61,10 +60,16 @@ public class Data {
     String [] highScoreNames = new String[10];
 
     public Data() {
+        try {
+            LoadProprieties();
+            InitializeLevels();
+            LoadHighScore();
+        }catch (Exception e){}
+
 
     }
     /**
-     * Metoda wczytuj¹ca konfiguracjê z pliku config.properties
+     * Metoda wczytuj?ca konfiguracj? z pliku config.properties
      *
      * @throws IOException
      */
@@ -115,23 +120,24 @@ public class Data {
     {
         levels = new String[5];
         try{
-            for (int i=1;i<=5;++i)
-               LoadLevel(i);
+            for (int i=0;i<5;i++)
+               LoadLevel(i+1);
         }catch (Exception e){}
 
     }
 
     private void LoadLevel(int levelNumber) throws IOException {
+
         BufferedWriter levelWriter = null;
-        levels[levelNumber]="";
+        levels[levelNumber-1]="";
         try {
             BufferedReader levelParser = new BufferedReader(new FileReader(new File("levels/level" + levelNumber + ".eiti")));
             levelWriter = new BufferedWriter(new FileWriter(new File("levels/level" + levelNumber + ".out")));
-
+            levelNumber--;
             String line;
             int row = BoardHeight - 1;
             while ((line = levelParser.readLine()) != null) {
-                levels[levelNumber]+=line;
+                levels[levelNumber]+=(line+ "\r\n");
             }
         } catch (IOException e) {
 
@@ -146,35 +152,25 @@ public class Data {
         }
     }
 
-    private void LoadHighScore(){
-        BufferedWriter hsWriter = null;
+    private void LoadHighScore() {
         try {
             BufferedReader hsParser = new BufferedReader(new FileReader(new File("hs.eiti")));
-            hsWriter = new BufferedWriter(new FileWriter(new File("hs.out")));
 
             String line;
-            for (int i=0; i<10; ++i){
+            for (int i = 0; i < 10; ++i) {
                 line = hsParser.readLine();
-                String [] tmp = line.split(" ");
+                String[] tmp = line.split(" ");
                 highScoreNames[i] = tmp[0];
                 highScoreValues[i] = Integer.valueOf(tmp[1]);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
 
-        } finally {
-            if (hsWriter != null) {
-                try {
-                    hsWriter.close();
-                } catch (IOException e) {
-
-                }
-            }
         }
     }
 
-    public void ChangeHighScore(int score, String name){
+    public int ChangeHighScore(int score, String name){
         if (score <= highScoreValues[9])
-            return;
+            return 0;
         else {
             highScoreNames[9] = name;
             highScoreValues[9] = score;
@@ -191,6 +187,7 @@ public class Data {
                     highScoreNames[i+1]=tmpName;
                 }
         }
+        return 1;
     }
 
    private void SaveHighScore()throws  IOException{
@@ -213,16 +210,24 @@ public class Data {
         return result.trim();
     }
 
+    public String ConfigToString(){
+        String result = lineScore + " " +blockScore + " " + BoardWidth + " " + BoardHeight + " " +
+                scale+ " " +playerName+ " " +penalty+ " " +levelScore+ " " +speed+ " " +maxPowerUp;
+        return result;
+    }
+
     public static void main(String[] args) throws IOException {
         Data d = new Data();
-        d.LoadHighScore();
-        d.ChangeHighScore(100,"Bahia");
         try {
-            d.SaveHighScore();
-        } catch (IOException e) {
+            d.InitializeLevels();
+            int x=0;
+            x++;
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        String [] tmp = d.HighScoreToString().split("\\W+");
-        System.out.println(d.HighScoreToString());
+        String s = "Kwkw aka  aKass ask s";
+        String [] sa = s.split(" " ,2);
+        System.out.printf("%s", "DefaultSettingsConfig " + d.ConfigToString());;
+
     }
 }
