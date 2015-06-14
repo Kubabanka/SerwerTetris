@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.Arrays;
 
+/**
+ * Klasa przechowuj¹ca w sobie dane z plików
+ */
 
 /**
  * Created by Jakub Bañka & Tomasz Duda

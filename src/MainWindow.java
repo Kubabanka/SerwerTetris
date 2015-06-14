@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
- * Created by Ur on 2015-06-13.
+ * Odpowiada za interfejs graficzny (GUI) aplikacji serwera.
  */
 public class MainWindow implements Runnable, LogChangedListener {
     private JFrame mainFrame;
@@ -25,20 +25,55 @@ public class MainWindow implements Runnable, LogChangedListener {
     private JButton resetLogConsoleButton;
     private Server appServer;
 
+    /**
+     * Inicjalizuje graficzne komponenty u¿yte w programie.
+     */
     private void initializeComponents(){
+        /**
+         * Wygl¹d buttonów bêdzie dostosowywa³ siê do systemu operacyjnego.
+         */
         UIManager.getSystemLookAndFeelClassName();
+        /**
+         * Inicjalizuje g³ówn¹ ramkê okna.
+         */
         initializeMainFrame();
+        /**
+         * Inicjaluzje pole tekstowe konsoli logów.
+         */
         initializeLogConsoleTextField();
+        /**
+         * Inicjalizuje obiekt s³u¿¹cy do grupowania przycisków.
+         */
         initializeAButtonGroup();
+        /**
+         * Inicjalizuje panel na samej górze okna.
+         */
         initializeTopPanel();
+        /**
+         * Inicjalizuje jeden z przycisków s³u¿¹cych do ustawienia, które logi bêd¹ zapisywane.
+         * All - wszysto
+         */
         initializeLogAllRadioButton();
+        /**
+         * Inicjalizuje jeden z przycisków s³u¿¹cych do ustawienia, które logi bêd¹ zapisywane.
+         * None - nic
+         */
         initializeLogNoneRadioButton();
+        /**
+         * Inicjalizuje jeden z przycisków s³u¿¹cych do ustawienia, które logi bêd¹ zapisywane.
+         * User - u¿ytkownicy
+         */
         initializeLogUserRadioButton();
+        /**
+         * Inicjalizuje przycisk restartuj¹cy widok w konsoli.
+         */
         initializeResetLogConsole();
+
         appServer = new Server();
         Thread serverThread = new Thread(appServer);
         serverThread.start();
 
+        // Gdy zamykamy okno, zamykany jest równie¿ serwer.
         mainFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -137,6 +172,9 @@ public class MainWindow implements Runnable, LogChangedListener {
         }
     }
 
+    /**
+     * Uruchamia program.
+     */
     public void run(){
         initializeComponents();
 
