@@ -23,6 +23,7 @@ public class Server implements Runnable {
     {
         logLevel = LogLevel.LogAll;
     }
+
     private void runServer() {
         int serverPort = 8085;
         try {

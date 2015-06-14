@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SerwerTetris.iml" filepath="$PROJECT_DIR$/SerwerTetris.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/SerwerTetris.iml" filepath="$PROJECT_DIR$/.idea/SerwerTetris.iml" />
     </modules>
   </component>
 </project>
