@@ -1,50 +1,59 @@
 import java.io.*;
+import java.util.Arrays;
 
 
 /**
- * Created by Ba?ka on 2015-06-14.
+ * Created by Jakub Bañka & Tomasz Duda
+ * EiTI
+ * 2015
+ *
+ * @author Jakub Bañka
+ * @author Tomasz Duda
  */
 public class Data {
 
     /**
-     * Sta?a m?wi?ca ile blok?w szeroko?ci ma plansza.
+     * Sta³a mówi¹ca ile bloków szerokoœci ma plansza.
      */
     int BoardWidth;
 
     /**
-     * Sta?a m?wi?ca ile blok?w wysoko?ci ma plansza.
+     * Sta³a mówi¹ca ile bloków wysokoœci ma plansza.
      */
     int BoardHeight;
 
+    /**
+     * Wspó³czynnik skaluj¹cy - wp³ywa na szybkoœæ opadania (im wiêkszy, tym wolniej opadaj¹ klocki)
+     */
     int scale;
 
     /**
-     * Ilo?? punkt?w za skasowanie jednej linii.
+     * Iloœæ punktów za skasowanie jednej linii.
      */
     int lineScore;
 
     /**
-     * Liczba punkt?w za zniszczenie jednego bloku przy wybuchu.
+     * Liczba punktów za zniszczenie jednego bloku przy wybuchu.
      */
     int blockScore;
 
     /**
-     * Kara za u?ycie power-upu.
+     * Kara za u¿ycie power-upu.
      */
     int penalty;
 
     /**
-     * Liczba punkt?w za przej?cie na kolejny poziom.
+     * Liczba punktów za przejœcie na kolejny poziom.
      */
     int levelScore;
 
     /**
-     * Pr?dko?? opadania klocka.
+     * Prêdkoœæ opadania klocka.
      */
     int speed;
 
     /**
-     * Maksymalna ilo?? power-up?w.
+     * Maksymalna iloœæ power-upów.
      */
     int maxPowerUp;
 
@@ -66,10 +75,9 @@ public class Data {
             LoadHighScore();
         }catch (Exception e){}
 
-
     }
     /**
-     * Metoda wczytuj?ca konfiguracj? z pliku config.properties
+     * Metoda wczytuj¹ca konfiguracjê z pliku config.properties
      *
      * @throws IOException
      */
@@ -127,7 +135,6 @@ public class Data {
     }
 
     private void LoadLevel(int levelNumber) throws IOException {
-
         BufferedWriter levelWriter = null;
         levels[levelNumber-1]="";
         try {
@@ -193,7 +200,7 @@ public class Data {
    private void SaveHighScore()throws  IOException{
        PrintWriter pw=null;
        try{
-           pw = new PrintWriter("hs.eiti");
+           pw = new PrintWriter("high_scores.eiti");
            pw.print(HighScoreToString());
        }catch (Exception e){}
        finally {

@@ -25,7 +25,7 @@ public class Server implements Runnable {
     }
 
     private void runServer() {
-        int serverPort = 8085;
+        int serverPort = 8087;
         try {
             setLog("Starting Server");
             serverSocket = new ServerSocket(serverPort);
