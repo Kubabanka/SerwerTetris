@@ -1,9 +1,6 @@
 import java.io.*;
 import java.util.Arrays;
 
-/**
- * Klasa przechowuj¹ca w sobie dane z plików
- */
 
 /**
  * Created by Jakub Bañka & Tomasz Duda
@@ -13,6 +10,11 @@ import java.util.Arrays;
  * @author Jakub Bañka
  * @author Tomasz Duda
  */
+
+/**
+ * Klasa przechowuj¹ca w sobie dane z plików
+ */
+
 public class Data {
 
     /**
@@ -65,12 +67,24 @@ public class Data {
      */
     String playerName;
 
+    /**
+     * Tablica poziomów.
+     */
     String [] levels;
 
+    /**
+     * Tablica najlepszych wyników.
+     */
     int [] highScoreValues=new int[10];
 
+    /**
+     * Tablica nazw u¿ytkowników z najlepszymi wynikami.
+     */
     String [] highScoreNames = new String[10];
 
+    /**
+     * Metoda obs³uguj¹ca ³adowanie ustawieñ gry.
+     */
     public Data() {
         try {
             LoadProprieties();
@@ -127,6 +141,9 @@ public class Data {
 
     }
 
+    /**
+     * Metoda inicjalizuj¹ca poziomy.
+     */
     private void InitializeLevels()
     {
         levels = new String[9];
@@ -137,12 +154,17 @@ public class Data {
 
     }
 
+    /**
+     * Metoda ³aduj¹ca poziomy
+     * @param levelNumber Numer poziomu.
+     * @throws IOException Wyj¹tek.
+     */
     private void LoadLevel(int levelNumber) throws IOException {
         BufferedWriter levelWriter = null;
         levels[levelNumber-1]="";
         try {
             BufferedReader levelParser = new BufferedReader(new FileReader(new File("levels/level" + levelNumber + ".eiti")));
-            levelWriter = new BufferedWriter(new FileWriter(new File("levels/level" + levelNumber + ".out")));
+           // levelWriter = new BufferedWriter(new FileWriter(new File("levels/level" + levelNumber + ".out")));
             levelNumber--;
             String line;
             while ((line = levelParser.readLine()) != null) {
@@ -161,6 +183,9 @@ public class Data {
         }
     }
 
+    /**
+     * Metoda odczytuj¹ca najlepszy wynik z tablicy wyników (z pliku high_scores.eiti).
+     */
     private void LoadHighScore() {
         try {
             BufferedReader hsParser = new BufferedReader(new FileReader(new File("high_scores.eiti")));
@@ -177,6 +202,11 @@ public class Data {
         }
     }
 
+    /**
+     * Metoda s³u¿¹ca zmianie rekordu w tablicy najlepszych wyników.
+     * @param score wynik
+     * @param name nazwa u¿ytkownika
+     */
     public int ChangeHighScore(int score, String name){
         if (score <= highScoreValues[9])
             return 0;
@@ -201,6 +231,10 @@ public class Data {
         return 1;
     }
 
+    /**
+     * Metoda s³u¿¹ca zapisaniu najlepszego wyniku w pliku high_scores.eiti
+     * @throws IOException Wyj¹tek.
+     */
    private void SaveHighScore()throws  IOException{
        PrintWriter pw=null;
        try{
@@ -214,6 +248,9 @@ public class Data {
        }
    }
 
+    /**
+     * Parsowanie pliku z najlepszymi wynikami w celu ³atwiejszego wys³ania.
+     */
     public String HighScoreToString() {
         String result = "";
         for (int i=0;i<10;++i)
@@ -221,12 +258,18 @@ public class Data {
         return result.trim();
     }
 
+    /**
+     * Parsowanie pliku konfiguracyjnego w celu ³atwiejszego wys³ania.
+     */
     public String ConfigToString(){
         String result = lineScore + " " +blockScore + " " + BoardWidth + " " + BoardHeight + " " +
                 scale+ " " +playerName+ " " +penalty+ " " +levelScore+ " " +speed+ " " +maxPowerUp;
         return result;
     }
 
+    /**
+     * G³ówna funkcja. Inizjalizuje oraz za³adowuje poziomy.
+     */
     public static void main(String[] args) throws IOException {
         Data d = new Data();
         try {

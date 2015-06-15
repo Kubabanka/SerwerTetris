@@ -4,33 +4,36 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+/**
+ * Metoda s³u¿¹ca do ob³ugi zadañ.
+ */
 class ServiceRequest implements Runnable {
 
     /**
-     * Model gniazda sï¿½uï¿½ï¿½cy do obsï¿½ugi ruchu internetowego.
+     *  Model gniazda s³u¿¹cy do obs³ugi ruchu internetowego.
      */
     private Socket socket;
 
     /**
-     * Ktï¿½re dane bï¿½dï¿½ przechowywane w logu (wszystko, nic, uï¿½ytkownik)
+     * Które dane bêd¹ przechowywane w logu (wszystko, nic, u¿ytkownik)
      */
     private Server.LogLevel logLevel;
 
     /**
-     * Okreï¿½lenie jednego z punktï¿½w koï¿½cowych (do czego ma siï¿½ podï¿½ï¿½czyï¿½ klient).
+     * Okreœlenie jednego z punktów koñcowych (do czego ma siê pod³¹czyæ klient).
      */
     private Server appServer;
 
     /**
-     * Zbiï¿½r danych.
+     * Zbiór danych.
      */
     private Data aData = new Data();
 
     /**
-     * Obsï¿½uguje ï¿½ï¿½danie.
-     * @param connection poï¿½ï¿½czenie
-     * @param logLevel okreï¿½lenie danych przechowywanych w logu
-     * @param appServer okreï¿½la, do czego ma poï¿½ï¿½czyï¿½ siï¿½ klient
+     * Obs³uguje ¿¹danie.
+     * @param connection po³¹czenie
+     * @param logLevel okreœlenie danych przechowywanych w logu
+     * @param appServer okreœla, do czego ma po³¹czyæ siê klient
      */
     public ServiceRequest(Socket connection, Server.LogLevel logLevel, Server appServer) {
         this.socket = connection;
@@ -39,7 +42,7 @@ class ServiceRequest implements Runnable {
     }
 
     /**
-     * Uruchamia serwer i zajmuje siï¿½ komunikacjï¿½ pomiï¿½dzy punktami koï¿½cowymi.
+     * Uruchamia serwer i zajmuje siê komunikacj¹ pomiêdzy punktami koñcowymi.
      */
     public void run() {
         try {
