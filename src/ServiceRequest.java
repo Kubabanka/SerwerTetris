@@ -7,30 +7,30 @@ import java.net.Socket;
 class ServiceRequest implements Runnable {
 
     /**
-     * Model gniazda s³u¿¹cy do obs³ugi ruchu internetowego.
+     * Model gniazda sï¿½uï¿½ï¿½cy do obsï¿½ugi ruchu internetowego.
      */
     private Socket socket;
 
     /**
-     * Które dane bêd¹ przechowywane w logu (wszystko, nic, u¿ytkownik)
+     * Ktï¿½re dane bï¿½dï¿½ przechowywane w logu (wszystko, nic, uï¿½ytkownik)
      */
     private Server.LogLevel logLevel;
 
     /**
-     * Okreœlenie jednego z punktów koñcowych (do czego ma siê pod³¹czyæ klient).
+     * Okreï¿½lenie jednego z punktï¿½w koï¿½cowych (do czego ma siï¿½ podï¿½ï¿½czyï¿½ klient).
      */
     private Server appServer;
 
     /**
-     * Zbiór danych.
+     * Zbiï¿½r danych.
      */
     private Data aData = new Data();
 
     /**
-     * Obs³uguje ¿¹danie.
-     * @param connection po³¹czenie
-     * @param logLevel okreœlenie danych przechowywanych w logu
-     * @param appServer okreœla, do czego ma po³¹czyæ siê klient
+     * Obsï¿½uguje ï¿½ï¿½danie.
+     * @param connection poï¿½ï¿½czenie
+     * @param logLevel okreï¿½lenie danych przechowywanych w logu
+     * @param appServer okreï¿½la, do czego ma poï¿½ï¿½czyï¿½ siï¿½ klient
      */
     public ServiceRequest(Socket connection, Server.LogLevel logLevel, Server appServer) {
         this.socket = connection;
@@ -39,7 +39,7 @@ class ServiceRequest implements Runnable {
     }
 
     /**
-     * Uruchamia serwer i zajmuje siê komunikacj¹ pomiêdzy punktami koñcowymi.
+     * Uruchamia serwer i zajmuje siï¿½ komunikacjï¿½ pomiï¿½dzy punktami koï¿½cowymi.
      */
     public void run() {
         try {
@@ -61,7 +61,7 @@ class ServiceRequest implements Runnable {
                         out.printf("%s", "NewScoreReply " + aData.ChangeHighScore(Integer.parseInt(var[1]),var[0]));
                         break;
                     case ("LevelRequest"):
-                        out.printf("%s", "Level"+Integer.parseInt(splitted[1])+" " + aData.levels[Integer.parseInt(splitted[1])]);
+                        out.printf("%s", "Level "+splitted[1]+" " + aData.levels[Integer.parseInt(splitted[1])-1]);
                         break;
                     case ("DefaultSettingsRequest"):
                         out.printf("%s", "DefaultSettingsConfig " + aData.ConfigToString());

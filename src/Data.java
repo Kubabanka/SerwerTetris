@@ -129,9 +129,9 @@ public class Data {
 
     private void InitializeLevels()
     {
-        levels = new String[5];
+        levels = new String[9];
         try{
-            for (int i=0;i<5;i++)
+            for (int i=0;i<=9;i++)
                LoadLevel(i+1);
         }catch (Exception e){}
 
@@ -145,7 +145,6 @@ public class Data {
             levelWriter = new BufferedWriter(new FileWriter(new File("levels/level" + levelNumber + ".out")));
             levelNumber--;
             String line;
-            int row = BoardHeight - 1;
             while ((line = levelParser.readLine()) != null) {
                 levels[levelNumber]+=(line+ "\r\n");
             }
@@ -164,7 +163,7 @@ public class Data {
 
     private void LoadHighScore() {
         try {
-            BufferedReader hsParser = new BufferedReader(new FileReader(new File("hs.eiti")));
+            BufferedReader hsParser = new BufferedReader(new FileReader(new File("high_scores.eiti")));
 
             String line;
             for (int i = 0; i < 10; ++i) {
@@ -197,6 +196,8 @@ public class Data {
                     highScoreNames[i+1]=tmpName;
                 }
         }
+        try{SaveHighScore();}
+        catch (Exception e){};
         return 1;
     }
 
@@ -230,14 +231,13 @@ public class Data {
         Data d = new Data();
         try {
             d.InitializeLevels();
+            d.LoadHighScore();
             int x=0;
             x++;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String s = "Kwkw aka  aKass ask s";
-        String [] sa = s.split(" " ,2);
-        System.out.printf("%s", "DefaultSettingsConfig " + d.ConfigToString());;
+        System.out.println(d.HighScoreToString());
 
     }
 }
