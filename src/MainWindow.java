@@ -90,18 +90,27 @@ public class MainWindow implements Runnable, LogChangedListener {
         });
     }
 
+    /**
+     * Inicjalizuje przycisk Reset konsoli.
+     */
     private void initializeResetLogConsole() {
         resetLogConsoleButton = new JButton();
         resetLogConsoleButton.setText("Reset konsoli");
         topPanel.add(resetLogConsoleButton);
     }
 
+    /**
+     * Inicjalizuje górny panel.
+     */
     private void initializeTopPanel() {
         topPanel = new JPanel();
         topPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "wybierz"));
         mainFrame.add(topPanel, BorderLayout.NORTH);
     }
 
+    /**
+     * Inicjalizuje pole na logi.
+     */
     private void initializeLogConsoleTextField() {
         logConsoleTextArea = new JTextArea();
         JScrollPane scrollPane = new JScrollPane(logConsoleTextArea);
@@ -111,6 +120,9 @@ public class MainWindow implements Runnable, LogChangedListener {
     }
 
 
+    /**
+     * Inicjalizuje g³ówn¹ ramkê.
+     */
     private void initializeMainFrame() {
         Dimension screnDimension = Toolkit.getDefaultToolkit().getScreenSize();
         mainFrame = new JFrame();
@@ -124,10 +136,16 @@ public class MainWindow implements Runnable, LogChangedListener {
         mainFrame.setVisible(true);
     }
 
+    /**
+     * Inicjalizuje buttony.
+     */
     private void initializeAButtonGroup(){
         aButtonGroup = new ButtonGroup();
     }
 
+    /**
+     * Inicjalizuje buttony wyboru opcji "wszystko".
+     */
     private void initializeLogAllRadioButton(){
         logAllRadioButton = new JRadioButton("wszystko",true);
         aButtonGroup.add(logAllRadioButton);
@@ -138,6 +156,9 @@ public class MainWindow implements Runnable, LogChangedListener {
             }
         });
     }
+    /**
+     * Inicjalizuje buttony wyboru opcji "uzytkownikow".
+     */
     private void initializeLogUserRadioButton(){
         logUserRadioButton = new JRadioButton("uzytkownikow ",false);
         aButtonGroup.add(logUserRadioButton);
@@ -148,6 +169,9 @@ public class MainWindow implements Runnable, LogChangedListener {
             }
         });
     }
+    /**
+     * Inicjalizuje buttony wyboru opcji "nic".
+     */
     private void initializeLogNoneRadioButton(){
         logNoneRadioButton = new JRadioButton("nic",false);
         aButtonGroup.add(logNoneRadioButton);
@@ -159,6 +183,9 @@ public class MainWindow implements Runnable, LogChangedListener {
         });
     }
 
+    /**
+     * Zmiana poziomu logów.
+     */
     private void changeLogLevel()
     {
         if(logAllRadioButton.isSelected()) {
@@ -180,7 +207,9 @@ public class MainWindow implements Runnable, LogChangedListener {
 
     }
 
-
+    /**
+     * Zmiana logu.
+     */
     @Override
     public void logChanged(Event e) {
         logConsoleTextArea.setText(logConsoleTextArea.getText() + "\r\n" + appServer.getLog());

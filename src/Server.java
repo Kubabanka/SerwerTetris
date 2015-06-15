@@ -13,17 +13,58 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server implements Runnable {
-    public enum LogLevel{LogAll, LogUser, LogNone}
+    public enum LogLevel{
+        /**
+         * Wyœwietla wszystkie logi.
+         */
+        LogAll,
+
+        /**
+         * Wyœwietla logi tylko u¿ytkowników.
+         */
+        LogUser,
+
+        /**
+         * Nie wyœwietla logów.
+         */
+        LogNone}
+
+    /**
+     * Jeden log.
+     */
     private String log = "";
+
+    /**
+     * Lista zdarzeñ.
+     */
     private EventListenerList logChangedListeners = new EventListenerList();
+
+    /**
+     * Poziom logu.
+     */
     private LogLevel logLevel;
+
+    /**
+     * Gniazdo serwera.
+     */
     private ServerSocket serverSocket;
+
+    /**
+     * Serwis Wykonawców - s³u¿y do ³atwego tworzenia w¹tków i zarz¹dzania nimi.
+     */
     private ExecutorService executorService = Executors.newFixedThreadPool(10);
+
+    /**
+     * Serwer aplikacji.
+     */
     public Server()
     {
         logLevel = LogLevel.LogAll;
     }
 
+    /**
+     * Uruchomienie serwera.
+     */
     private void runServer() {
         int serverPort = 8087;
         try {
@@ -45,11 +86,14 @@ public class Server implements Runnable {
                 }
             }
         }catch(IOException e) {
-            setLog("Error starting Server on " + serverPort);
+            setLog("Error starting Server on port " + serverPort);
             e.printStackTrace();
         }
     }
 
+    /**
+     * Zatrzymanie serwera.
+     */
     public void stopServer() {
         executorService.shutdownNow();
         try {
