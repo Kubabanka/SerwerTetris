@@ -21,6 +21,11 @@ public class Data {
     int BoardWidth;
 
     /**
+     * IP serwera
+     */
+    String hostIP;
+
+    /**
      * Sta³a mówi¹ca ile bloków wysokoœci ma plansza.
      */
     int BoardHeight;
@@ -101,7 +106,7 @@ public class Data {
             String _maxPowerUp = properties.getProperty("maxPowerUp");
 
             playerName = properties.getProperty("playerName");
-
+            hostIP=properties.getProperty("hostIP");
             lineScore = Integer.parseInt(_lineScore);
             blockScore = Integer.parseInt(_blockScore);
             BoardWidth = Integer.parseInt(_width);
@@ -223,7 +228,7 @@ public class Data {
 
     public String ConfigToString(){
         String result = lineScore + " " +blockScore + " " + BoardWidth + " " + BoardHeight + " " +
-                scale+ " " +playerName+ " " +penalty+ " " +levelScore+ " " +speed+ " " +maxPowerUp;
+                scale+ " " +playerName+ " " +penalty+ " " +levelScore+ " " +speed+ " " +maxPowerUp+" " + hostIP;
         return result;
     }
 
